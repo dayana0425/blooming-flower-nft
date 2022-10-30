@@ -1,4 +1,9 @@
 # Blossoming Flower NFT - A Customizable Dynamic NFT
+* Week 3 of Alchemy's Road To Web3 Challenge [link](https://docs.alchemy.com/docs/3-how-to-make-nfts-with-on-chain-metadata-hardhat-and-javascript)
+* Make NFTs with On-Chain Metadata that we can update
+* Process and store on-chain SVG images and JSON objects
+* Modifying the metadata to modify the image's SVG Attributes & update the NFT's image
+* Encode SVG Image to a Base64 String.
 
 ### Chose Your Colors Here
 * [Color Palettes](https://palettes.shecodes.io/)
