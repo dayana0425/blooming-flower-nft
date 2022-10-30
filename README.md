@@ -49,7 +49,7 @@ yarn test
     * Add `import "hardhat/console.sol";` to your file
     * Make sure you're running your script on `--network hardhat`
 
-* Editor Example:
+* Example of pasting the base64 img into the editor above:
 ```html
 <!DOCTYPE html>
 <html>
@@ -63,7 +63,7 @@ yarn test
 </html>
 ```
 
-Solidity Example:
+Solidity - console.log(base64img):
 ```javascript
     function generateFlower(uint256 id) internal returns(string memory){
         FlowerStats memory data = idToFlowerStats[id];
