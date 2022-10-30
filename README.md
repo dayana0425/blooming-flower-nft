@@ -2,7 +2,7 @@
 * Week 3 of Alchemy's Road To Web3 Challenge [link](https://docs.alchemy.com/docs/3-how-to-make-nfts-with-on-chain-metadata-hardhat-and-javascript)
 * Made an NFT with On-Chain & Updatable Metadata, SVG Image, and Base64 Encoding
 
-### Chose Your Colors Here
+### Choose Your Colors Here
 * [Color Palettes](https://palettes.shecodes.io/)
 * [Color Picker](https://www.w3schools.com/colors/colors_picker.asp)
 
@@ -23,7 +23,7 @@ let txn = await contract.mint("Dayana", "#8ef6e4", "#9896f1", "#9896f1");
 ### Water Your Flower
 * Watering Inputs
   * Provide your flower's token ID (ex: 1)
-  * Provide color for new petal (CSS Hex Input, ex: "#f5c7f7")
+  * Provide color for the new petal (CSS Hex Input, ex: "#f5c7f7")
   * You can only water your flower 8 times for it to complete.
 
 Example Water Call:
