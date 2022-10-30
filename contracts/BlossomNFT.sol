@@ -38,15 +38,16 @@ contract BlossomNFT is ERC721URIStorage  {
     }
 
     function generateFlower(uint256 id) internal returns(string memory){
+        FlowerStats memory data = idToFlowerStats[id];
         bytes memory svg = 
         abi.encodePacked(
             '<svg viewBox="13 -4 461 455" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://www.boxy-svg.com/bx">',
-            string(abi.encodePacked("<rect width='100%' height='100%' fill='", getBackgroundColor(id),"'/>")),
+            string(abi.encodePacked("<rect width='100%' height='100%' fill='", data.background,"'/>")),
             getPetals(id),
             '<ellipse style="fill:#ffc93c;" cx="242.767" cy="223.713" rx="26.285" ry="25.904"/>',
-            string(abi.encodePacked("<ellipse style='fill:", getSeedColor(id),";' cx='242.767' cy='223.713' rx='26.285' ry='25.904'/>")),
-            string(abi.encodePacked("<text x='50%' y='95%' fill='", getFontColor(id), "' dominant-baseline='middle' text-anchor='middle'>")),
-            getName(id), 
+            string(abi.encodePacked("<ellipse style='fill:", data.seed,";' cx='242.767' cy='223.713' rx='26.285' ry='25.904'/>")),
+            string(abi.encodePacked("<text x='50%' y='95%' fill='", data.font, "' dominant-baseline='middle' text-anchor='middle'>")),
+            data.name, 
             '</text>'
             '</svg>');
 
@@ -55,33 +56,10 @@ contract BlossomNFT is ERC721URIStorage  {
                 "data:image/svg+xml;base64,",
                 Base64.encode(svg))
               );
-
-        console.log("\n---FLOWER ", id, "---");
-        console.log(string(uri));
-        console.log("------\n");
+        console.log(uri);
         return uri;
     }    
     
-    function getName(uint256 id) public view returns (string memory) {
-      FlowerStats memory data = idToFlowerStats[id];
-      return data.name;
-    }
-
-    function getBackgroundColor(uint id) public view returns(string memory) {
-      FlowerStats memory data = idToFlowerStats[id];
-      return data.background;
-    }
-
-    function getFontColor(uint id) public view returns(string memory) {
-      FlowerStats memory data = idToFlowerStats[id];
-      return data.font;
-    }
-
-    function getSeedColor(uint id) public view returns(string memory) {
-      FlowerStats memory data = idToFlowerStats[id];
-      return data.seed;
-    }
-
     function getPetals(uint id) internal returns(string memory){
       FlowerStats memory data = idToFlowerStats[id];
       uint256 index = data.level;
@@ -107,7 +85,6 @@ contract BlossomNFT is ERC721URIStorage  {
               '"image": "', generateFlower(id), '"',
           '}'
       );
-      console.log("dshdsds");
       return string(
           abi.encodePacked(
               "data:application/json;base64,",
@@ -123,7 +100,6 @@ contract BlossomNFT is ERC721URIStorage  {
     {
         _ids.increment();
         uint256 newFlowerId = _ids.current();
-        console.log("New Flower ID:", newFlowerId);
         _safeMint(msg.sender, newFlowerId);
         
         string[] memory colors;
