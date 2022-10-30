@@ -1,6 +1,7 @@
 
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
+import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
@@ -50,11 +51,16 @@ contract BlossomNFT is ERC721URIStorage  {
             '</svg>'
         );
 
-        string memory uri = 
+        string memory base64img = 
               string(abi.encodePacked(
                 "data:image/svg+xml;base64,",
                 Base64.encode(svg))
               );
+
+        if (data.level == 8) {
+          console.log(base64img);
+        }
+
         return uri;
     }    
     

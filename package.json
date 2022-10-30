@@ -8,6 +8,7 @@
     "fork": "hardhat node --no-deploy --network hardhat --fork https://mainnet.infura.io/v3/460f40a260564ac4a4f4b3fffb032dad",
     "compile": "hardhat compile",
     "deploy": "hardhat run --network mumbai scripts/deploy.ts",
+    "color": "hardhat run --network hardhat scripts/crazyFlower.ts",
     "test": "hardhat run --network hardhat scripts/run.ts"
   },
   "devDependencies": {
