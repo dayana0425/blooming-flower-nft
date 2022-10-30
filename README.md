@@ -41,12 +41,13 @@ yarn deploy
 yarn test
 ```
 ### Debugging Tips
-* To test how your svg image is looking like without deploying to testnet & inspecting opensea eachtime (Been there, done that)... I recommend:
-* Using this editor to paste your image's Base64 in the src: https://www.w3docs.com/tools/code-editor/10848
-* You can do this by console.log() your base64 img in your solidity code & pasting the output in the editor above
-* How do you console.log from a Solidity file??
-  * Make sure you're running your script on `--network hardhat`
-  * Add `import "hardhat/console.sol";` to your file
+* To test how your svg image is looking like without deploying to testnet & inspecting opensea eachtime (Been there, done that) I recommend:
+  * Using this editor to paste your image's Base64 in the src: https://www.w3docs.com/tools/code-editor/10848
+  * How do you get the base64 image? 
+    * console.log() it in your solidity code
+  * How do you console.log() in Solidity?
+    * Add `import "hardhat/console.sol";` to your file
+    * Make sure you're running your script on `--network hardhat`
 
 * Editor Example:
 ```html
