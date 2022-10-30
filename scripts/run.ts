@@ -10,7 +10,7 @@ async function main() {
     console.log(`Contract deployed at ${contract.address}`);
 
   console.log("Minting Flower...");
-  let txn = await contract.mint("Dayana");
+  let txn = await contract.mint("Dayana", "#8ef6e4", "#9896f1", "#d59bf6");
   await txn.wait();
 }
 
