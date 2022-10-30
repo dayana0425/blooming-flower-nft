@@ -1,4 +1,4 @@
-# Blossoming Flower NFT - A Customizable Dynamic NFT
+# Blooming Flower NFT - A Customizable Dynamic NFT
 * Week 3 of Alchemy's Road To Web3 Challenge [link](https://docs.alchemy.com/docs/3-how-to-make-nfts-with-on-chain-metadata-hardhat-and-javascript)
 * Make NFTs with On-Chain Metadata that we can update
 * Process and store on-chain SVG images and JSON objects
@@ -8,7 +8,7 @@
 * [Color Palettes](https://palettes.shecodes.io/)
 * [Color Picker](https://www.w3schools.com/colors/colors_picker.asp)
 
-### Mint Your Blossoming Flower NFT
+### Mint Your Blooming Flower NFT
 * Minting Inputs:
   * Name of your flower (ex: Your name...)
     * [name generator](https://www.fantasynamegenerators.com/magic-types.php)
