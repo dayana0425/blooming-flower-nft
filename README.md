@@ -2,10 +2,13 @@
 
 ### Chose Your Colors Here
 * [Color Palettes](https://palettes.shecodes.io/)
+* [Color Picker](https://www.w3schools.com/colors/colors_picker.asp)
 
 ### Mint Your Blossoming Flower NFT
 * Minting Inputs:
   * Name of your flower (ex: Your name...)
+    * [name generator](https://www.fantasynamegenerators.com/magic-types.php)
+    * [name generator 2](https://www.fantasynamegenerators.com/mutant-plant-names.php)
   * Background Color (CSS Hex Input, ex: "#8ef6e4")
   * Font Color of your flower's name (CSS Hex Input, ex: "#9896f1")
   * Seed Color (CSS Hex Input, ex: "#9896f1")
@@ -93,3 +96,17 @@ Solidity - console.log(base64img):
         return uri;
     }    
 ```
+
+### Testnet Walkthrough
+* [Verified Contract](https://mumbai.polygonscan.com/address/0x12f21039d9ec8f7def4b2eb393212070f96ef95e)
+* [View The Genesis NFT on OpenSea](https://testnets.opensea.io/assets/mumbai/0x12f21039d9ec8f7def4b2eb393212070f96ef95e/1)
+* Mint:
+![t1](images/t1.png)
+* After Mint: 
+![t2](images/t2.png)
+* Water:
+![t6](images/t6.png)
+* After Watering 3 Times: 
+![t7](images/t7.png)
+* Transaction Fees:
+![t4](images/t4.png)
