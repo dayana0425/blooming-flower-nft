@@ -42,7 +42,7 @@ yarn test
 ```
 ### Debugging Tips
 * To test how your svg image is looking like without deploying to testnet & inspecting opensea eachtime (Been there, done that) I recommend:
-  * Using this editor to paste your image's Base64 in the src: https://www.w3docs.com/tools/code-editor/10848
+  * Use this editor to paste your image's Base64 in the src of the img tag: https://www.w3docs.com/tools/code-editor/10848
   * How do you get the base64 image? 
     * console.log() it in your solidity code
   * How do you console.log() in Solidity?
