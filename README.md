@@ -4,7 +4,6 @@
 * Process and store on-chain SVG images and JSON objects
 * Modifying the metadata to modify the image's SVG Attributes & update the NFT's image
 * Encode SVG Image to a Base64 String.
-
 ### Chose Your Colors Here
 * [Color Palettes](https://palettes.shecodes.io/)
 * [Color Picker](https://www.w3schools.com/colors/colors_picker.asp)
