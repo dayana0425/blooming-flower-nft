@@ -3,13 +3,9 @@ import { ethers } from "hardhat";
 async function main() {
     const contractFactory = await ethers.getContractFactory('BlossomNFT');
     const contract = await contractFactory.deploy();
-    console.log("Contract deployed to:", contract.address);
-    console.log("Awaiting confirmations");
     await contract.deployed();
-    console.log("Completed");
     console.log(`Contract deployed at ${contract.address}`);
 
-    // deployer
     console.log("Minting Flower #1...");
     let txn = await contract.mint("Magical Flower", "#5585b5", "#bbe4e9", "#ff6f3c"); // bg, font, seed
     await txn.wait();

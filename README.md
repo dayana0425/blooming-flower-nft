@@ -39,6 +39,7 @@ txn = await contract.water(1, "#f5c7f7");
 yarn compile
 yarn deploy
 yarn test
+yarn color
 ```
 ### Debugging Tips
 * To test how your svg image is looking like without deploying to testnet & inspecting opensea eachtime (Been there, done that) I recommend:

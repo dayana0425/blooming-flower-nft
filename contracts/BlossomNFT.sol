@@ -40,28 +40,22 @@ contract BlossomNFT is ERC721URIStorage  {
     function generateFlower(uint256 id) internal returns(string memory){
         FlowerStats memory data = idToFlowerStats[id];
         bytes memory svg = abi.encodePacked(
-            '<svg viewBox="13 -4 461 455" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://www.boxy-svg.com/bx">',
-            string(abi.encodePacked("<rect width='100%' height='100%' fill='", data.background,"'/>")),
+            '<svg viewBox="13 -4 461 455" xmlns="http://www.w3.org/2000/svg">',
+            string(abi.encodePacked("<rect width='100%' height='100%' fill='",data.background,"'/>")),
             getPetals(id),
-            '<ellipse style="fill:#ffc93c;" cx="242.767" cy="223.713" rx="26.285" ry="25.904"/>',
-            string(abi.encodePacked("<ellipse style='fill:", data.seed,";' cx='242.767' cy='223.713' rx='26.285' ry='25.904'/>")),
-            string(abi.encodePacked("<text x='50%' y='95%' fill='", data.font, "' dominant-baseline='middle' text-anchor='middle'>")),
-            data.name, 
-            '</text>'
+            string(abi.encodePacked("<ellipse style='fill:",data.seed,";' cx='242.767' cy='223.713' rx='26.285' ry='25.904'/>")),
+            string(abi.encodePacked("<text x='50%' y='95%' fill='",data.font, "' dominant-baseline='middle' text-anchor='middle'>",data.name,"</text>")),
             '</svg>'
         );
 
-        string memory base64img = 
-              string(abi.encodePacked(
-                "data:image/svg+xml;base64,",
-                Base64.encode(svg))
-              );
+        string memory base64img = string(
+          abi.encodePacked(
+            "data:image/svg+xml;base64,",
+            Base64.encode(svg))
+          );
 
-        if (data.level == 8) {
-          console.log(base64img);
-        }
-
-        return uri;
+        if (data.level == 8) console.log(base64img);
+        return base64img;
     }    
     
     function getPetals(uint id) internal returns(string memory){
