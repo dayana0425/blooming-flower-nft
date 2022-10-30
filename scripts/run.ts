@@ -11,7 +11,7 @@ async function main() {
     const [deployer, address1] = await ethers.getSigners();
 
     // deployer
-    console.log("Minting Flower...");
+    console.log("Minting Flower #1...");
     let txn = await contract.mint("Dayana", "#8ef6e4", "#9896f1", "#d59bf6");
     await txn.wait();
     console.log("Minted!");
@@ -57,7 +57,7 @@ async function main() {
     console.log("Done Watering! Pedal #8 Blossomed.");
 
     // address 1
-    console.log("Minting Flower... AGAIN");
+    console.log("Minting Flower #2...");
     txn = await contract.connect(address1).mint("Brendon", "#00204a", "#005792", "#00bbf0");
     await txn.wait();
     console.log("Minted!");

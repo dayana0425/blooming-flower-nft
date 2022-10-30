@@ -1,14 +1,35 @@
-# Sample Hardhat Project
+# Blossoming Flower NFT - A Customizable Dynamic NFT
 
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
+### Mint Your Blossoming Flower NFT
+* Minting Inputs:
+  * Name of your flower (ex: Your name...)
+  * Background Color (CSS Hex Input, ex: "#8ef6e4")
+  * Font Color of your flower's name (CSS Hex Input, ex: "#9896f1")
+  * Seed Color (CSS Hex Input, ex: "#9896f1")
 
-Try running some of the following tasks:
-
-```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
-npx hardhat run scripts/deploy.ts
+Example Mint Call: 
 ```
-# grow-flower
+let txn = await contract.mint("Dayana", "#8ef6e4", "#9896f1", "#9896f1");
+```
+
+### Water Your Flower
+* Watering Inputs
+  * Provide your flower's token ID (ex: 1)
+  * Provide color for new petal (CSS Hex Input, ex: "#f5c7f7")
+  * You can only water your flower 8 times for it to complete.
+
+Example Water Call:
+```
+txn = await contract.water(1, "#f5c7f7");
+```
+### Example Outputs of Completed Flowers: 
+![Figure 1](images/f1.png)
+![Figure 2](images/f2.png)
+
+### Quick Start 
+* First, Fork & Clone Repository
+```shell
+yarn compile
+yarn deploy
+yarn test
+```

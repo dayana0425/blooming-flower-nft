@@ -1,7 +1,6 @@
 
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
-import "hardhat/console.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
@@ -39,8 +38,7 @@ contract BlossomNFT is ERC721URIStorage  {
 
     function generateFlower(uint256 id) internal returns(string memory){
         FlowerStats memory data = idToFlowerStats[id];
-        bytes memory svg = 
-        abi.encodePacked(
+        bytes memory svg = abi.encodePacked(
             '<svg viewBox="13 -4 461 455" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://www.boxy-svg.com/bx">',
             string(abi.encodePacked("<rect width='100%' height='100%' fill='", data.background,"'/>")),
             getPetals(id),
@@ -49,14 +47,14 @@ contract BlossomNFT is ERC721URIStorage  {
             string(abi.encodePacked("<text x='50%' y='95%' fill='", data.font, "' dominant-baseline='middle' text-anchor='middle'>")),
             data.name, 
             '</text>'
-            '</svg>');
+            '</svg>'
+        );
 
         string memory uri = 
               string(abi.encodePacked(
                 "data:image/svg+xml;base64,",
                 Base64.encode(svg))
               );
-        console.log(uri);
         return uri;
     }    
     

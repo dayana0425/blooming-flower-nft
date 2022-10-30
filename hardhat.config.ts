@@ -16,10 +16,18 @@ const config: HardhatUserConfig = {
       },
     },
   },
-  defaultNetwork: "hardhat",
+  defaultNetwork: "mumbai",
   networks: {
     hardhat: {
       chainId: 1337,
+    },
+    mumbai: {
+      url: process.env.MUMBAI_ALCHEMY_API_URL,
+      accounts: {
+        mnemonic: process.env.MNEMONIC,
+      },
+      gas: 2100000,
+      gasPrice: 8000000000,
     }
   },
   etherscan: {
