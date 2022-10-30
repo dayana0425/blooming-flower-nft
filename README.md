@@ -77,7 +77,6 @@ Solidity - console.log(base64img):
             '<svg viewBox="13 -4 461 455" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://www.boxy-svg.com/bx">',
             string(abi.encodePacked("<rect width='100%' height='100%' fill='", data.background,"'/>")),
             getPetals(id),
-            '<ellipse style="fill:#ffc93c;" cx="242.767" cy="223.713" rx="26.285" ry="25.904"/>',
             string(abi.encodePacked("<ellipse style='fill:", data.seed,";' cx='242.767' cy='223.713' rx='26.285' ry='25.904'/>")),
             string(abi.encodePacked("<text x='50%' y='95%' fill='", data.font, "' dominant-baseline='middle' text-anchor='middle'>")),
             data.name, 
@@ -95,7 +94,7 @@ Solidity - console.log(base64img):
           console.log(base64img);
         }
 
-        return uri;
+        return base64img;
     }    
 ```
 
