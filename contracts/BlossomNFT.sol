@@ -12,7 +12,6 @@ contract BlossomNFT is ERC721URIStorage  {
     using Counters for Counters.Counter;
 
     Counters.Counter private _ids;
-    string[] palette;
     string[] directions;
 
     struct FlowerStats {
@@ -21,22 +20,24 @@ contract BlossomNFT is ERC721URIStorage  {
         string background;
         string font;
         string seed;
+        bytes currentImage;
+        string[] palette;
     }
   
     mapping(uint256 => FlowerStats) public idToFlowerStats;
     constructor() ERC721 ("Blossom", "BLOSS"){
-        // setting all the flower petal directions
-        directions.push('matrix(0.678571, 0, 0, 0.717326, 121.009552, -24.106068)');
-        directions.push('matrix(0.479822, 0.479822, -0.507226, 0.507226, 338.366028, -43.240444)');
-        directions.push('matrix(0, 0.678571, -0.717326, 0, 492.233185, 101.835365)');
-        directions.push('matrix(-0.479822, 0.479822, -0.507226, -0.507226, 509.336121, 317.41394)');
-        directions.push('matrix(0.678571, 0, 0, 0.717326, 122.53334, 153.415024)');
-        directions.push('matrix(-0.479822, -0.479822, 0.507226, -0.507226, 148.681854, 489.907806)');
-        directions.push('matrix(0, 0.678571, -0.717326, 0, 314.712097, 103.359146)');
-        directions.push('matrix(0.479822, -0.479822, 0.507226, 0.507226, -23.812111, 129.253433)');
+        // setting flower petal directions - same for all flower NFTs
+        directions.push('matrix(0.678571, 0, 0, 0.717326, 121.009552, -24.106068)'); // 0
+        directions.push('matrix(0.479822, 0.479822, -0.507226, 0.507226, 338.366028, -43.240444)'); // 1
+        directions.push('matrix(0, 0.678571, -0.717326, 0, 492.233185, 101.835365)'); // 2
+        directions.push('matrix(-0.479822, 0.479822, -0.507226, -0.507226, 509.336121, 317.41394)'); // 3
+        directions.push('matrix(0.678571, 0, 0, 0.717326, 122.53334, 153.415024)'); // 4
+        directions.push('matrix(-0.479822, -0.479822, 0.507226, -0.507226, 148.681854, 489.907806)'); // 5
+        directions.push('matrix(0, 0.678571, -0.717326, 0, 314.712097, 103.359146)'); // 6
+        directions.push('matrix(0.479822, -0.479822, 0.507226, 0.507226, -23.812111, 129.253433)'); // 7
     }
 
-    function generateFlower(uint256 id) internal view returns(string memory){
+    function generateFlower(uint256 id) internal returns(string memory){
         bytes memory svg = 
         abi.encodePacked(
             '<svg viewBox="13 -4 461 455" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://www.boxy-svg.com/bx">',
@@ -81,22 +82,24 @@ contract BlossomNFT is ERC721URIStorage  {
       return data.seed;
     }
 
-    function getPetals(uint id) internal view returns (string memory) {
+    function getPetals(uint id) internal returns(string memory){
       FlowerStats memory data = idToFlowerStats[id];
-      bytes memory res;
-      for(uint256 i = 0; i < data.level; i++) {
-        bytes memory currentPetal = abi.encodePacked(
-            string(abi.encodePacked("<g transform='", directions[i], "'>")),
-            string(abi.encodePacked("<path d='M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665' style='stroke: none; fill:",palette[i],";stroke-width:3;stroke:black'/>")),
-            string(abi.encodePacked("<path d='M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903' style='stroke: none; fill:",palette[i],";stroke-width:3;stroke:black'/>")),
-            string(abi.encodePacked("</g>"))
+      uint256 index = data.level;
+      if (index >= 1) {
+        bytes memory newPetal = abi.encodePacked(
+              string(abi.encodePacked("<g transform='", directions[index-1], "'>")),
+              string(abi.encodePacked("<path d='M 177.62 98.002 C 141.811 170.89 142.573 254.444 179.906 348.665' style='stroke: none; fill:",data.palette[index-1],";stroke-width:3;stroke:black'/>")),
+              string(abi.encodePacked("<path d='M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903' style='stroke: none; fill:",data.palette[index-1],";stroke-width:3;stroke:black'/>")),
+              string(abi.encodePacked("</g>"))
         );
-        res = abi.encodePacked(res, currentPetal);
+        data.currentImage = abi.encodePacked(data.currentImage, newPetal);
+        idToFlowerStats[id] = data;
+        return string(data.currentImage);
       }
-      return string(res);
+      return "";
     }
 
-    function getTokenURI(uint256 id) private view returns (string memory){
+    function getTokenURI(uint256 id) private returns (string memory){
       bytes memory dataURI = abi.encodePacked(
           '{',
               '"name": "Blossoming Flower #', id.toString(), '",',
@@ -104,6 +107,7 @@ contract BlossomNFT is ERC721URIStorage  {
               '"image": "', generateFlower(id), '"',
           '}'
       );
+      console.log("dshdsds");
       return string(
           abi.encodePacked(
               "data:application/json;base64,",
@@ -121,8 +125,9 @@ contract BlossomNFT is ERC721URIStorage  {
         uint256 newFlowerId = _ids.current();
         console.log("New Flower ID:", newFlowerId);
         _safeMint(msg.sender, newFlowerId);
-
-        FlowerStats memory flowerStats = FlowerStats(0, name, background, font, seed);
+        
+        string[] memory colors;
+        FlowerStats memory flowerStats = FlowerStats(0, name, background, font, seed, "", colors);
 
         idToFlowerStats[newFlowerId] = flowerStats;
 
@@ -130,14 +135,16 @@ contract BlossomNFT is ERC721URIStorage  {
     }
 
     function water(uint256 id, string memory color) public {
+      FlowerStats storage currentFlower = idToFlowerStats[id];
+      uint256 currentLevel = currentFlower.level;
       require(_exists(id));
       require(ownerOf(id) == msg.sender, "You must own this NFT to water it!");
-      require(idToFlowerStats[id].level <= 8, "Your flower is done growing.");
-      palette.push(color);
-      FlowerStats memory currentFlower = idToFlowerStats[id];
-      uint256 currentLevel = currentFlower.level;
+      require(currentLevel <= 8, "Your flower is done growing.");
+
       currentFlower.level = currentLevel + 1;
       idToFlowerStats[id] = currentFlower;
+      currentFlower.palette.push(color);
+
       _setTokenURI(id, getTokenURI(id));
     }
 }
