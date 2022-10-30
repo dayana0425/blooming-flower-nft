@@ -24,15 +24,28 @@ contract BlossomNFT is ERC721URIStorage  {
     mapping(uint256 => FlowerStats) public idToFlowerStats;
 
     constructor() ERC721 ("Blossom", "BLOSS"){
-        palette.push("#fac901"); 
-        palette.push("#225095"); 
+        palette.push("#8ef6e4"); 
+        palette.push("#9896f1");
+        palette.push("#d59bf6"); 
+        palette.push("#225095");
+
+        palette.push("#27296d"); 
+        palette.push("#5e63b6");
+        palette.push("#a393eb"); 
+        palette.push("#f5c7f7"); 
 
         tilts.push('matrix(0.678571, 0, 0, 0.717326, 121.009552, -24.106068)');
         tilts.push('matrix(0.479822, 0.479822, -0.507226, 0.507226, 338.366028, -43.240444)');
-      
+        tilts.push('matrix(0, 0.678571, -0.717326, 0, 492.233185, 101.835365)');
+        tilts.push('matrix(-0.479822, 0.479822, -0.507226, -0.507226, 509.336121, 317.41394)');
+
+        tilts.push('matrix(0.678571, 0, 0, 0.717326, 122.53334, 153.415024)');
+        tilts.push('matrix(-0.479822, -0.479822, 0.507226, -0.507226, 148.681854, 489.907806)');
+        tilts.push('matrix(0, 0.678571, -0.717326, 0, 314.712097, 103.359146)');
+        tilts.push('matrix(0.479822, -0.479822, 0.507226, 0.507226, -23.812111, 129.253433)');
     }
 
-    function generateFlower(uint256 id) view internal returns(string memory){
+    function generateFlower(uint256 id) internal returns(string memory){
         bytes memory svg = 
         abi.encodePacked(
             '<svg viewBox="13 -4 461 455" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://www.boxy-svg.com/bx">',
@@ -57,7 +70,7 @@ contract BlossomNFT is ERC721URIStorage  {
     }
 
     function getPetals() internal returns (string memory) {
-      bytes memory res = ""
+      bytes memory res;
       for(uint256 i = 0; i < tilts.length; i++) {
         bytes memory currentPetal = abi.encodePacked(
             string(abi.encodePacked("<g transform='", tilts[i], "'>")),
@@ -65,13 +78,16 @@ contract BlossomNFT is ERC721URIStorage  {
             string(abi.encodePacked("<path d='M 176.858 98.002 C 211.905 173.175 212.921 256.476 179.906 347.903' style='stroke: none; fill:",palette[i],";stroke-width:3;stroke:black'/>")),
             string(abi.encodePacked("</g>"))
         );
-        bytes.concat(res, currentPetal);
+        console.log("INDEX", i, ": ");
+        console.log(string(currentPetal));
+        res = abi.encodePacked(res, currentPetal);
       }
 
+      console.log("RESULT", string(res));
       return string(res);
     }
 
-    function getTokenURI(uint256 id) private view returns (string memory){
+    function getTokenURI(uint256 id) private returns (string memory){
       bytes memory dataURI = abi.encodePacked(
           '{',
               '"name": "Blossom #', id.toString(), '",',
