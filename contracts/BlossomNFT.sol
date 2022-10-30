@@ -55,9 +55,9 @@ contract BlossomNFT is ERC721URIStorage  {
                 Base64.encode(svg))
               );
 
-        console.log("\n--------------------");
+        console.log("\n---FLOWER ", id, "---");
         console.log(string(uri));
-        console.log("--------------------\n");
+        console.log("------\n");
         return uri;
     }    
     
@@ -93,7 +93,6 @@ contract BlossomNFT is ERC721URIStorage  {
         );
         res = abi.encodePacked(res, currentPetal);
       }
-      console.log("Image: ", string(res));
       return string(res);
     }
 
@@ -120,6 +119,7 @@ contract BlossomNFT is ERC721URIStorage  {
     {
         _ids.increment();
         uint256 newFlowerId = _ids.current();
+        console.log("New Flower ID:", newFlowerId);
         _safeMint(msg.sender, newFlowerId);
 
         FlowerStats memory flowerStats = FlowerStats(0, name, background, font, seed);
